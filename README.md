@@ -38,7 +38,7 @@ Installation
 
         session	optional	/lib/security/libpam_ldapsetquota.so
 
-  - `optional` can be change to `required` that leads to forcely cancel creating user session if any error occurred.
+  - `optional` can be changed to `required` that leads to forcely cancel creating user session if any error occurred.
   - You can check log on `auth.log` (`/var/log/auth.log`).
 
 Useful Resources
