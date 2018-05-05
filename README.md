@@ -58,6 +58,7 @@ TODO List
 ---------
 - [ ]  Read config from argument not from config.h.
 - [x]  Specifying UID range which policy apply to.
+- [ ]  Specifying timeout for all operations.
 
 Useful Resources
 ----------------
