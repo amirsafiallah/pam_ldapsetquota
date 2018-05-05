@@ -54,6 +54,11 @@ Installation
   - `optional` can be changed to `required` that leads to forcely cancel creating user session if any error occurred.
   - You can check log on `auth.log` (`/var/log/auth.log`).
 
+TODO List
+---------
+- [] Read config from argument not from config.h.
+- [] specifying UID range which policy apply to.
+
 Useful Resources
 ----------------
 Set quota C source code:
