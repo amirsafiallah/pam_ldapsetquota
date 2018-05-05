@@ -28,9 +28,9 @@ if (PAM_INCLUDE_DIR AND PAM_LIBRARY)
     endif (EXISTS ${PAM_INCLUDE_DIR}/pam/pam_appl.h)
 
     if (NOT DEFINED PAM_MESSAGE_CONST)
-        include(CheckCXXSourceCompiles)
+        include(CheckCSourceCompiles)
         # XXX does this work with plain c?
-        check_cxx_source_compiles("
+        check_c_source_compiles("
 #if ${HAVE_PAM_PAM_APPL_H}+0
 # include <pam/pam_appl.h>
 #else

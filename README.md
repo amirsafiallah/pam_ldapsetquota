@@ -4,12 +4,18 @@ This PAM module reads quota attribute from LDAP then changes user quota on openi
 
 Requirement
 -----------
-For Ubuntu 16.04:
-
-- `libldap2-dev`
-- `libpam0g-dev`
+- Install build essential package
+- Install CMake 3.10 or higher
 - Config linux authenticator to use LDAP. https://goo.gl/1eRdtW
 - Install and config `quota` package on linux. https://goo.gl/Bsmwng
+
+For Ubuntu 16.04:
+- `libldap2-dev`
+- `libpam0g-dev`
+
+For Opensuse:
+- `pam-devel`
+- `libldap-2_X_Y`
 
 Installation
 ------------
@@ -30,7 +36,14 @@ Installation
 
   Note that in order to disable `BlocksSoft`, `BlocksHard`, `BlocksHard`, `InodesHard`, you can set them (or each one) to zero (`0`).
 - Change `config.h` in this library according to your LDAP server.
-- Compile library.
+- Compile library:
+
+        cd pam_ldapsetquota
+        mkdir build
+        cd build
+        cmake ..
+        make
+        
 - Copy `libpam_ldapsetquota.so` to `/lib/security` (create `security` folder if it doesn't exist).
 - Change `security` folder (if you created it) and `libpam_ldapsetquota.so` owner to `root:root`.
 - Change chmod of `security` folder (if you created it) and `libpam_ldapsetquota.so` to `755` and `644` respectively.
@@ -40,6 +53,11 @@ Installation
 
   - `optional` can be changed to `required` that leads to forcely cancel creating user session if any error occurred.
   - You can check log on `auth.log` (`/var/log/auth.log`).
+
+TODO List
+---------
+- [ ]  Read config from argument not from config.h.
+- [ ]  Specifying UID range which policy apply to.
 
 Useful Resources
 ----------------
