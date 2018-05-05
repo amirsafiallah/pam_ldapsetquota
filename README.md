@@ -56,8 +56,8 @@ Installation
 
 TODO List
 ---------
-- [] Read config from argument not from config.h.
-- [] specifying UID range which policy apply to.
+- [ ]  Read config from argument not from config.h.
+- [ ]  specifying UID range which policy apply to.
 
 Useful Resources
 ----------------
