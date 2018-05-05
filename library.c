@@ -117,7 +117,7 @@ int configure(pam_handle_t *pamh, const struct ldap_quota *pQuota, uid_t uid) {
     /* Get limits */
     if (quotactl(QCMD(Q_GETQUOTA, USRQUOTA), mntdevice, pwd->pw_uid,
                  (void *) &ndqblk) == -1) {
-        pam_syslog(pamh, LOG_ERR, "%s",strerror(errno));
+        pam_syslog(pamh, LOG_ERR, "%s", strerror(errno));
         return PAM_PERM_DENIED;
     }
 
@@ -125,14 +125,14 @@ int configure(pam_handle_t *pamh, const struct ldap_quota *pQuota, uid_t uid) {
 
     if (quotactl(QCMD(Q_SETQUOTA, USRQUOTA), mntdevice, pwd->pw_uid,
                  (void *) &ndqblk) == -1) {
-        pam_syslog(pamh, LOG_ERR, "%s",strerror(errno));
+        pam_syslog(pamh, LOG_ERR, "%s", strerror(errno));
         return PAM_PERM_DENIED;
     }
     return PAM_SUCCESS;
 }
 
 int pam_sm_open_session(pam_handle_t *pamh, int flags, int argc, const char **argv) {
-    int read;
+    int read = 0;
     int retval;
     const void *user;
     const struct passwd *pwd;
@@ -159,6 +159,9 @@ int pam_sm_open_session(pam_handle_t *pamh, int flags, int argc, const char **ar
     if (pwd == NULL) {
         return PAM_CRED_INSUFFICIENT;
     }
+
+    if (pwd->pw_uid < START_UID || pwd->pw_uid > END_UID)
+        return PAM_SUCCESS;
 
     sprintf(filter, "uidNumber=%u", pwd->pw_uid);
 
