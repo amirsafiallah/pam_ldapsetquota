@@ -13,4 +13,7 @@
 #define START_UID 1000
 #define END_UID 3000
 
+//comment line below to not skip local user
+#define PASSWD_LOCATION "/etc/passwd"
+
 #endif //PAM_LDAPSETQUOTA_CONFIG_H

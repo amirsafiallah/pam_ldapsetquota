@@ -44,6 +44,38 @@ char *trim(char *str) {
     return str;
 }
 
+/*
+ * return:
+ * 1: instead of found
+ * 0: instead of not found
+ * -1: instead of error
+ */
+#ifdef PASSWD_LOCATION
+int exist(uid_t uid){
+    int found;
+    FILE* file;
+    struct passwd *pwd;
+
+    found = -1;
+
+    file = fopen(PASSWD_LOCATION,"r");
+    if (file == NULL){
+        return found;
+    }
+
+    while(1){
+        pwd = fgetpwent(file);
+        if (pwd==NULL) break;
+
+        found =  (pwd->pw_uid == uid);
+        if (found) break;
+    }
+
+    fclose(file);
+    return found;
+}
+#endif
+
 //return 1 if success
 int read_ldap_quota(char *str, struct ldap_quota *a) {
     //read (FileSystem:BlocksSoft,BlocksHard,InodesSoft,InodesHard) from quota attribute
@@ -162,6 +194,13 @@ int pam_sm_open_session(pam_handle_t *pamh, int flags, int argc, const char **ar
 
     if (pwd->pw_uid < START_UID || pwd->pw_uid > END_UID)
         return PAM_SUCCESS;
+
+    //do not check a local user.
+#ifdef PASSWD_LOCATION
+    if (exist(pwd->pw_uid)==1){
+        return PAM_SUCCESS;
+    }
+#endif
 
     sprintf(filter, "uidNumber=%u", pwd->pw_uid);
 

@@ -54,6 +54,12 @@ Installation
   - `optional` can be changed to `required` that leads to forcely cancel creating user session if any error occurred.
   - You can check log on `auth.log` (`/var/log/auth.log`).
 
+What is local users skip
+------------------------
+if you want this module to not read local user attribute from ldap and only
+update ldap users's quota (or other users than locals) , just
+define `PASSWD_LOCATION` in the config file, otherwise comment it.
+
 TODO List
 ---------
 - [ ]  Read config from argument not from config.h.
