@@ -47,7 +47,7 @@ Installation
         
 - Copy `libpam_ldapsetquota.so` to `/lib/security` (create `security` folder if it doesn't exist).
 - Change `security` folder (if you created it) and `libpam_ldapsetquota.so` owner to `root:root`.
-- Change chmod of `security` folder (if you created it) and `libpam_ldapsetquota.so` to `755` and `644` respectively.
+- Change chmod of `security` folder (if you created it) and `libpam_ldapsetquota.so` to `755` and `500` respectively.
 - Append the following line to `/etc/pam.d/common-session`
 
         session	optional	/lib/security/libpam_ldapsetquota.so
