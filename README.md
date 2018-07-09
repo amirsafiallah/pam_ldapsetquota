@@ -16,6 +16,7 @@ For Ubuntu 16.04:
 For Opensuse:
 - `pam-devel`
 - `libldap-2_X_Y`
+-  `openldap2-devel`
 
 Installation
 ------------
